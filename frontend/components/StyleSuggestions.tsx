@@ -124,7 +124,7 @@ export default function StyleSuggestions({
                       <button
                         onClick={() =>
                           window.open(
-                            `https://calendly.com/your-link?style=${encodeURIComponent(
+                            `https://calendly.com/mgstudiosaloon/mg-studio?style=${encodeURIComponent(
                               title
                             )}`,
                             "_blank"
