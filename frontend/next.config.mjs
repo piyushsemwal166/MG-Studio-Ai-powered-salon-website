@@ -1,19 +1,32 @@
-import { dirname } from "node:path"
-import { fileURLToPath } from "node:url"
+import { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const projectRoot = dirname(fileURLToPath(import.meta.url))
+const projectRoot = dirname(fileURLToPath(import.meta.url));
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   turbopack: {
     root: projectRoot,
   },
+
   typescript: {
     ignoreBuildErrors: true,
   },
+
   images: {
     unoptimized: true,
   },
-}
 
-export default nextConfig
+  // ✅ IMPORTANT FIX FOR MEDIAPIPE
+  webpack: (config) => {
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
+      path: false,
+      os: false,
+    };
+    return config;
+  },
+};
+
+export default nextConfig;

@@ -6,6 +6,7 @@ import { HaircutCard } from "@/components/haircut-card";
 import { haircutStyles, ladiesSalonServices } from "@/lib/data";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Scissors, Award, Clock } from "lucide-react";
+import HairAnalyzer from "@/components/HairAnalyzer";
 
 export default function HomePage() {
   return (
@@ -73,7 +74,30 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+{/* AI Hairstyle Analyzer */}
+<section className="py-20 border-t border-border bg-background">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    {/* Section Heading */}
+    <div className="text-center mb-12">
+      <p className="text-primary uppercase tracking-widest text-sm mb-4">
+        AI Feature
+      </p>
+      <h2 className="text-3xl sm:text-4xl font-serif font-bold text-foreground mb-4">
+        Try AI Hairstyle Analyzer
+      </h2>
+      <p className="text-muted-foreground max-w-2xl mx-auto">
+        Upload your photo and discover hairstyles that suit your face shape instantly.
+      </p>
+    </div>
 
+    {/* Component */}
+    <div className="max-w-5xl mx-auto">
+      <HairAnalyzer />
+    </div>
+
+  </div>
+</section>
       {/* Features Section */}
       <section className="py-20 border-t border-border reveal-up reveal-delay-1">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
