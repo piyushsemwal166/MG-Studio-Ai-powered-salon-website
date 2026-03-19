@@ -1,7 +1,10 @@
 import Image from "next/image";
 import { Scissors } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface BarberCardProps {
+  id: number;
   name: string;
   title: string;
   specialty: string;
@@ -11,6 +14,7 @@ interface BarberCardProps {
 }
 
 export function BarberCard({
+  id,
   name,
   title,
   specialty,
@@ -51,18 +55,27 @@ export function BarberCard({
               {bio}
             </p>
 
-            <p className="text-primary font-medium">
+            <p className="text-primary font-medium mb-6">
               Specialty: {specialty}
             </p>
+
+            <Button
+              asChild
+              className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+            >
+              <Link href={`/portfolio/${id}`}>
+                My Work
+              </Link>
+            </Button>
           </div>
         </div>
       </div>
     );
   }
 
-  // OTHER BARBERS (UNCHANGED)
+  // OTHER BARBERS
   return (
-    <div className="group bg-card border border-border rounded-lg overflow-hidden transition-smooth hover:border-primary/50 hover-lift reveal-up">
+    <div className="group bg-card border border-border rounded-lg overflow-hidden transition-smooth hover:border-primary/50 hover-lift reveal-up flex flex-col">
       
       <div className="aspect-square relative overflow-hidden">
         <Image
@@ -73,16 +86,26 @@ export function BarberCard({
         />
       </div>
 
-      <div className="p-6">
+      <div className="p-6 flex flex-col flex-grow">
         <h3 className="text-xl font-serif font-bold text-foreground mb-1">
           {name}
         </h3>
 
         <p className="text-primary text-sm mb-2">{title}</p>
 
-        <p className="text-muted-foreground text-sm">
+        <p className="text-muted-foreground text-sm mb-4 flex-grow">
           Specialty: {specialty}
         </p>
+
+        <Button
+          asChild
+          variant="outline"
+          className="w-full border-primary text-primary hover:bg-primary/10"
+        >
+          <Link href={`/portfolio/${id}`}>
+            My Work
+          </Link>
+        </Button>
       </div>
     </div>
   );

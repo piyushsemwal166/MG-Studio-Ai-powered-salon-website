@@ -13,16 +13,29 @@ export const barbers = [
     bio: "With over 10 years of experience, Mohit founded MG STUDIO to bring premium grooming services to the community. His expertise spans classic barbering techniques and contemporary styles.",
     image: myImage,
     isOwner: true,
+    portfolio: [
+      { type: "video", src: "/videos/mohit/Mohit-1.mp4", title: "Fade Cutting" },
+       { type: "video", src: "/videos/mohit/Mohit-2.mp4", title: "Fade Cutting" },
+        { type: "video", src: "/videos/mohit/Mohit-4.mp4", title: "Fade Cutting" },
+      // { type: "image", src: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&h=600&fit=crop", title: "Classic Fade" },
+      // { type: "image", src: "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&h=600&fit=crop", title: "Textured Crop" },
+    
+      
+    ],
   },
   {
     id: 2,
-    name: "Gourav",
+    name: "Rishab",
     title: "Unisex Hairdresser ",
     specialty: "Women’s haircuts, hair coloring, and styling",
     bio: "",
     image: Gourav,
-    isOwner: false,
-  },
+    isOwner: false,    portfolio: [
+      { type: "video", src: "/videos/Rishab/Rishab-1.mp4", title: "Fade Cutting" },
+      { type: "video", src: "/videos/Rishab/Rishab-4.mp4", title: "Fade Cutting" },
+      { type: "video", src: "/videos/Rishab/Rishab-3.mp4", title: "Fade Cutting" },
+      // { type: "image", src: "https://images.unsplash.com/photo-1595348440529-ceb849e26b6f?w=600&h=600&fit=crop", title: "Hair Styling" },
+    ],  },
   {
     id: 3,
     name: "Tony",
@@ -31,6 +44,12 @@ export const barbers = [
     bio: "",
     image: Tony,
     isOwner: false,
+    portfolio: [
+      { type: "image", src: "https://images.unsplash.com/photo-1520975916090-3105956dac38?w=600&h=600&fit=crop", title: "Pompadour" },
+      { type: "video", src: "https://commondatastorage.googleapis.com/gtv-videos-library/sample/forrest_gump.mp4", title: "Beard Styling Tutorial" },
+      { type: "image", src: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=600&fit=crop", title: "Beard Styling" },
+      { type: "image", src: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&h=600&fit=crop", title: "Design Fade" },
+    ],
   },
   {
     id: 4,
@@ -40,6 +59,12 @@ export const barbers = [
     bio: "",
     image: Anuj,
     isOwner: false,
+    portfolio: [
+      { type: "image", src: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&h=600&fit=crop", title: "Clean Cut" },
+      { type: "video", src: "https://commondatastorage.googleapis.com/gtv-videos-library/sample/sintel.mp4", title: "Textured Cut Demo" },
+      { type: "image", src: "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&h=600&fit=crop", title: "Textured" },
+      { type: "image", src: "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=600&h=600&fit=crop", title: "Design Line" },
+    ],
   },
   {
     id: 5,
@@ -49,6 +74,12 @@ export const barbers = [
     bio: "",
     image: Rohit,
     isOwner: false,
+    portfolio: [
+      { type: "image", src: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&h=600&fit=crop", title: "Modern Fade" },
+      { type: "image", src: "https://images.unsplash.com/photo-1522337660859-02fbefca6088?w=600&h=600&fit=crop", title: "Styled Look" },
+      { type: "video", src: "https://commondatastorage.googleapis.com/gtv-videos-library/sample/testvideo.mp4", title: "Fade Technique" },
+      { type: "image", src: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&h=600&fit=crop", title: "Sharp Design" },
+    ],
   },
    {
     id: 6,
@@ -57,7 +88,13 @@ export const barbers = [
     specialty: "Textured Cuts & Designs",
     bio: "",
     image: Akshay,
-    isOwner: false, 
+    isOwner: false,
+    portfolio: [
+      { type: "image", src: "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&h=600&fit=crop", title: "Textured Crop" },
+      { type: "image", src: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=600&fit=crop", title: "Grooming" },
+      { type: "video", src: "https://commondatastorage.googleapis.com/gtv-videos-library/sample/vids_google_main.mp4", title: "Precision Cutting" },
+      { type: "image", src: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&h=600&fit=crop", title: "Precision Cut" },
+    ],
   },
  
  

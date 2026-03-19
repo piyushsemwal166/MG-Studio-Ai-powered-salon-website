@@ -43,6 +43,7 @@ export default function TeamPage() {
           
           {owner && (
             <BarberCard
+              id={owner.id}
               name={owner.name}
               title={owner.title}
               specialty={owner.specialty}
@@ -66,6 +67,7 @@ export default function TeamPage() {
             {workers.map((barber) => (
               <BarberCard
                 key={barber.id}
+                id={barber.id}
                 name={barber.name}
                 title={barber.title}
                 specialty={barber.specialty}
