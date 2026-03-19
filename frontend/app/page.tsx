@@ -181,7 +181,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 reveal-up reveal-delay-1">
             <p className="text-white/65 uppercase tracking-widest text-sm mb-4">Unisex Salon</p>
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-bright mb-4">
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-primary mb-4">
               Ladies Services
             </h2>
             <p className="text-white/75 max-w-2xl mx-auto leading-relaxed">
@@ -208,7 +208,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 reveal-up reveal-delay-1">
             <p className="text-white/65 uppercase tracking-widest text-sm mb-4">MG Studio Academy</p>
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-bright mb-4">
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-primary mb-4">
               Tuition Classes
             </h2>
             <p className="text-white/75 max-w-2xl mx-auto leading-relaxed">
