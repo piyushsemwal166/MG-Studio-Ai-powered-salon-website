@@ -67,7 +67,7 @@ export function Footer() {
                   href="mailto:mgstudiosalooon@gmail.com"
                   className="hover:text-primary hover:underline transition-smooth"
                 >
-                  mgstudiosalooon@gmail.com
+                  mgstudiosaloon@gmail.com
                 </Link>
               </div>
               <div className="flex items-center gap-3 text-muted-foreground">

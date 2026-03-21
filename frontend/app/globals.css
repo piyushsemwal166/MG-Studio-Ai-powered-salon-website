@@ -162,6 +162,83 @@
   .reveal-delay-6 {
     animation-delay: 480ms;
   }
+
+  .salon-animated-border {
+    background: linear-gradient(120deg, rgba(193, 144, 61, 0.25), rgba(255, 255, 255, 0.16), rgba(193, 144, 61, 0.72), rgba(193, 144, 61, 0.25));
+    background-size: 220% 220%;
+    animation: salon-border-flow 6s ease infinite;
+  }
+
+  .feature-icon-shell {
+    position: relative;
+    isolation: isolate;
+    overflow: visible;
+    animation: feature-shell-glow 4.4s ease-in-out infinite;
+    background: radial-gradient(circle at 30% 30%, rgba(193, 144, 61, 0.4), rgba(193, 144, 61, 0.14) 42%, rgba(193, 144, 61, 0.08) 70%);
+    border: 1px solid rgba(193, 144, 61, 0.26);
+  }
+
+  .feature-icon-shell-1 {
+    animation-delay: 0s;
+  }
+
+  .feature-icon-shell-2 {
+    animation-delay: 0.5s;
+  }
+
+  .feature-icon-shell-3 {
+    animation-delay: 1s;
+  }
+
+  .feature-icon-animate-scissors {
+    transform-origin: 52% 52%;
+    animation: feature-scissors-cut 2.3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  .feature-icon-animate-award {
+    transform-origin: center;
+    animation: feature-award-float 2.9s ease-in-out infinite;
+  }
+
+  .feature-icon-animate-clock {
+    transform-origin: center;
+    animation: feature-clock-tick 1.9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  .feature-icon-ring {
+    position: absolute;
+    inset: -5px;
+    border-radius: 9999px;
+    border: 1.4px solid rgba(193, 144, 61, 0.38);
+    opacity: 0;
+    animation: feature-ring-pulse 2.6s ease-out infinite;
+  }
+
+  .feature-icon-spark {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: rgba(255, 218, 145, 0.9);
+    box-shadow: 0 0 10px rgba(255, 218, 145, 0.8);
+    z-index: 2;
+    pointer-events: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .feature-icon-spark-1 {
+    animation: feature-spark-orbit 2.8s linear infinite;
+  }
+
+  .feature-icon-spark-2 {
+    animation: feature-spark-orbit 3.4s linear infinite reverse;
+  }
+
+  .feature-icon-spark-3 {
+    animation: feature-spark-orbit 2.4s linear infinite;
+  }
 }
 
 @keyframes reveal-up {
@@ -172,6 +249,122 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes salon-border-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes feature-shell-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 rgba(193, 144, 61, 0.14), 0 0 0 rgba(193, 144, 61, 0.1);
+    transform: translateY(0);
+  }
+  50% {
+    box-shadow: 0 10px 26px rgba(193, 144, 61, 0.3), 0 0 22px rgba(193, 144, 61, 0.3);
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes feature-scissors-cut {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+  20% {
+    transform: rotate(-11deg) scale(1.06);
+  }
+  36% {
+    transform: rotate(9deg) scale(1.03);
+  }
+  52% {
+    transform: rotate(-7deg) scale(1.04);
+  }
+  68% {
+    transform: rotate(7deg) scale(1.02);
+  }
+}
+
+@keyframes feature-award-float {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    filter: drop-shadow(0 0 0 rgba(193, 144, 61, 0));
+  }
+  35% {
+    transform: translateY(-4px) scale(1.08) rotate(-4deg);
+    filter: drop-shadow(0 8px 16px rgba(193, 144, 61, 0.35));
+  }
+  70% {
+    transform: translateY(-1px) scale(1.04) rotate(3deg);
+    filter: drop-shadow(0 6px 14px rgba(193, 144, 61, 0.32));
+  }
+}
+
+@keyframes feature-clock-tick {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+  15% {
+    transform: rotate(-7deg) scale(1.03);
+  }
+  30% {
+    transform: rotate(6deg) scale(1.05);
+  }
+  45% {
+    transform: rotate(-5deg) scale(1.03);
+  }
+  60% {
+    transform: rotate(5deg) scale(1.04);
+  }
+  75% {
+    transform: rotate(-4deg) scale(1.02);
+  }
+  90% {
+    transform: rotate(3deg) scale(1.01);
+  }
+}
+
+@keyframes feature-ring-pulse {
+  0% {
+    opacity: 0;
+    transform: scale(0.86);
+  }
+  35% {
+    opacity: 0.6;
+  }
+  70% {
+    opacity: 0.12;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.23);
+  }
+}
+
+@keyframes feature-spark-orbit {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) translateX(18px) scale(0.85);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(180deg) translateX(18px) scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg) translateX(18px) scale(0.85);
+    opacity: 0.6;
   }
 }
 
