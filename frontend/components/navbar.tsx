@@ -2,12 +2,19 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, PhoneCall, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [pathname]);
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -41,6 +48,7 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  scroll
                   className="text-foreground/80 hover:text-primary transition-smooth font-medium tracking-wide"
                 >
                   {link.label}
@@ -84,6 +92,7 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  scroll
                   className="text-foreground/85 hover:text-primary transition-smooth font-medium py-2.5 px-1"
                   onClick={() => setIsMenuOpen(false)}
                 >
