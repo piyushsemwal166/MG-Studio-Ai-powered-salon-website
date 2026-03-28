@@ -20,6 +20,16 @@ interface UploadFormProps {
   onSuccess: () => void;
 }
 
+interface SignatureResponse {
+  success: boolean;
+  cloudName: string;
+  apiKey: string;
+  timestamp: number;
+  folder: string;
+  resourceType: 'image' | 'video';
+  signature: string;
+}
+
 export function UploadForm({ onSuccess }: UploadFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -66,17 +76,60 @@ export function UploadForm({ onSuccess }: UploadFormProps) {
     setIsLoading(true);
 
     try {
-      const data = new FormData();
-      data.append('file', selectedFile);
-      data.append('barberId', formData.barberId);
-      data.append('barberName', formData.barberName);
-      data.append('type', formData.type);
-      data.append('title', formData.title);
-      data.append('caption', formData.caption);
+      const signatureResponse = await fetch('/api/admin/cloudinary-signature', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          barberId: formData.barberId,
+          type: formData.type,
+        }),
+      });
+
+      if (!signatureResponse.ok) {
+        const signatureError = await signatureResponse.json();
+        throw new Error(signatureError.error || 'Failed to prepare upload');
+      }
+
+      const signatureData = (await signatureResponse.json()) as SignatureResponse;
+
+      const cloudinaryData = new FormData();
+      cloudinaryData.append('file', selectedFile);
+      cloudinaryData.append('api_key', signatureData.apiKey);
+      cloudinaryData.append('timestamp', String(signatureData.timestamp));
+      cloudinaryData.append('signature', signatureData.signature);
+      cloudinaryData.append('folder', signatureData.folder);
+
+      const uploadResponse = await fetch(
+        `https://api.cloudinary.com/v1_1/${signatureData.cloudName}/${signatureData.resourceType}/upload`,
+        {
+          method: 'POST',
+          body: cloudinaryData,
+        }
+      );
+
+      if (!uploadResponse.ok) {
+        const uploadError = await uploadResponse.json();
+        throw new Error(uploadError.error?.message || 'Cloudinary upload failed');
+      }
+
+      const uploadResult = await uploadResponse.json();
 
       const response = await fetch('/api/admin/posts', {
         method: 'POST',
-        body: data,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          barberId: formData.barberId,
+          barberName: formData.barberName,
+          type: formData.type,
+          title: formData.title,
+          caption: formData.caption,
+          url: uploadResult.secure_url,
+          cloudinaryId: uploadResult.public_id,
+        }),
       });
 
       if (!response.ok) {

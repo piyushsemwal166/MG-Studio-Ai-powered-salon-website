@@ -21,6 +21,11 @@ export const metadata: Metadata = {
   title: "MG STUDIO | Premium Barber Shop & Unisex Salon",
   description:
     "Experience luxury grooming at MG STUDIO. Expert barbers, premium cuts, nail care, facials, and salon services for ladies.",
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({
@@ -43,7 +48,7 @@ export default function RootLayout({
 
         {children}
         <ChatBot />
-        <Analytics />
+        {process.env.NEXT_PUBLIC_ENABLE_VERCEL_ANALYTICS === "true" ? <Analytics /> : null}
       </body>
     </html>
   );

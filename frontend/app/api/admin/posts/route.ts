@@ -18,46 +18,77 @@ export async function POST(req: NextRequest) {
   try {
     await connectDB();
 
-    const formData = await req.formData();
-    const file = formData.get('file') as File;
-    const barberId = formData.get('barberId') as string;
-    const barberName = formData.get('barberName') as string;
-    const type = formData.get('type') as 'image' | 'video';
-    const title = formData.get('title') as string;
-    const caption = formData.get('caption') as string;
+    const contentType = req.headers.get('content-type') || '';
 
-    if (!file || !barberId || !barberName || !type || !title) {
-      return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
-      );
+    let barberId = '';
+    let barberName = '';
+    let type: 'image' | 'video' = 'image';
+    let title = '';
+    let caption = '';
+    let url = '';
+    let cloudinaryId = '';
+
+    // New flow: metadata only (file uploaded directly to Cloudinary from browser)
+    if (contentType.includes('application/json')) {
+      const body = await req.json();
+      barberId = String(body.barberId || '');
+      barberName = String(body.barberName || '');
+      type = body.type === 'video' ? 'video' : 'image';
+      title = String(body.title || '');
+      caption = String(body.caption || '');
+      url = String(body.url || '');
+      cloudinaryId = String(body.cloudinaryId || '');
+
+      if (!barberId || !barberName || !type || !title || !url || !cloudinaryId) {
+        return NextResponse.json(
+          { error: 'Missing required fields' },
+          { status: 400 }
+        );
+      }
+    } else {
+      // Legacy fallback flow: upload binary through this API route
+      const formData = await req.formData();
+      const file = formData.get('file') as File;
+      barberId = String(formData.get('barberId') || '');
+      barberName = String(formData.get('barberName') || '');
+      type = formData.get('type') === 'video' ? 'video' : 'image';
+      title = String(formData.get('title') || '');
+      caption = String(formData.get('caption') || '');
+
+      if (!file || !barberId || !barberName || !type || !title) {
+        return NextResponse.json(
+          { error: 'Missing required fields' },
+          { status: 400 }
+        );
+      }
+
+      const buffer = Buffer.from(await file.arrayBuffer());
+      const result = await new Promise((resolve, reject) => {
+        const uploadStream = cloudinary.uploader.upload_stream(
+          {
+            folder: `mg-studio/posts/${barberId}`,
+            resource_type: type === 'video' ? 'video' : 'image',
+          },
+          (error, result) => {
+            if (error) reject(error);
+            else resolve(result);
+          }
+        );
+
+        uploadStream.end(buffer);
+      }) as any;
+
+      url = result.secure_url;
+      cloudinaryId = result.public_id;
     }
-
-    // Upload to Cloudinary
-    const buffer = Buffer.from(await file.arrayBuffer());
-    
-    const result = await new Promise((resolve, reject) => {
-      const uploadStream = cloudinary.uploader.upload_stream(
-        {
-          folder: `mg-studio/posts/${barberId}`,
-          resource_type: type === 'video' ? 'video' : 'image',
-        },
-        (error, result) => {
-          if (error) reject(error);
-          else resolve(result);
-        }
-      );
-
-      uploadStream.end(buffer);
-    }) as any;
 
     // Save post to MongoDB
     const post = await Post.create({
       barberId: parseInt(barberId),
       barberName,
       type,
-      url: result.secure_url,
-      cloudinaryId: result.public_id,
+      url,
+      cloudinaryId,
       title,
       caption: caption || '',
     });
