@@ -1,0 +1,12 @@
+{
+  "name": "mg-studio-vercel-root",
+  "private": true,
+  "scripts": {
+    "vercel-build": "npm --prefix frontend install && npm --prefix frontend run build",
+    "build": "npm --prefix frontend run build",
+    "start": "npm --prefix frontend run start"
+  },
+  "dependencies": {
+    "next": "16.1.6"
+  }
+}
