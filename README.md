@@ -361,6 +361,3 @@ After adding/updating env variables, redeploy.
 - Add audit logging for content edits/deletes
 - Add automated tests for API routes and auth helpers
 
-## License
-
-Add your preferred license file (`LICENSE`) before making repository public.
